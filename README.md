@@ -2,7 +2,8 @@
 ## Setup
 1. install Unity
 2. Use Git command or SourceTree (need to install)
-3. setup .gitignore
+3. setup .gitignore  
+https://qiita.com/furogrammer/items/81435ac6912f2976cc9f 
 4. Setting code format
 
 ## Unity
