@@ -3,6 +3,7 @@
 1. install Unity
 2. Use Git command or SourceTree (need to install)
 3. setup .gitignore
+4. Setting code format
 
 ## Unity
 version:2017.2.0f3  
@@ -58,3 +59,6 @@ sysinfo.txt
 *.apk
 *.unitypackage
 ```
+
+## Setting Code Format
+![Setting Code Format](https://raw.githubusercontent.com/UniMulRock/save_images/master/MonoDevelopSettings/MonoDevelopSettings.png "Setting Code Format")
