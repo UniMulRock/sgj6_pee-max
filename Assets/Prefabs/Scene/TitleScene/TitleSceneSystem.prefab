@@ -52,7 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effects: {fileID: 0}
-  titleCanvas: {fileID: 0}
-  characterPosition: {x: 230, y: 35, z: 0}
+  characterPosition: {fileID: 0}
   characterImage: {fileID: 0}
   startText: {fileID: 0}
