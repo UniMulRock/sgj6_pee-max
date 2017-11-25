@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 2f68a3a7979894498aa80cd89b7074d8
+timeCreated: 1511584125
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: FC-Earth
+  fontNames:
+  - FC-Earth
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

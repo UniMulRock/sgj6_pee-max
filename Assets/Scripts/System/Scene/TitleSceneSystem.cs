@@ -1,30 +1,85 @@
 ﻿using Utility.System;
 using GodTouches;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using effects;
+using DG.Tweening;
 
 namespace System.Scene
 {
     public class TitleSceneSystem : SingletonMonoBehaviour<TitleSceneSystem>
     {
+        /// <summary>
+        /// 遷移エフェクト対象
+        /// </summary>
         [SerializeField]
         private EffectTweener effects;
+
+        /// <summary>
+        /// UIキャンバス
+        /// </summary>
+        [SerializeField]
+        private Canvas titleCanvas;
+
+        /// <summary>
+        /// キャラクター位置
+        /// </summary>
+        [SerializeField]
+        private Vector3 characterPosition;
+
+        /// <summary>
+        /// キャラクター
+        /// </summary>
+        [SerializeField]
+        private Image characterImage;
+
+        /// <summary>
+        /// テキスト
+        /// </summary>
+        [SerializeField]
+        private UnityEngine.UI.Text startText;
+
+        /// <summary>
+        /// 遷移が呼ばれているか
+        /// </summary>
         private bool isNextScene;
+
+        /// <summary>
+        /// タッチできるか
+        /// </summary>
+        private bool canTouch;
+
         void Start()
         {
-            if (!Sound.IsPlayingBgm())
-            {
-                Sound.PichBgm(1f);
-                Sound.PlayBgm("asr_story1_looped");
-            }
+            canTouch = false;
             effects.SetHidden(false);
             isNextScene = false;
+            if (characterImage != null)
+            {
+                characterImage.transform.DOMove(
+                    titleCanvas.transform.position + characterPosition,
+                    1f
+                ).OnComplete(()=>{
+                    // アニメーション終了時
+                    canTouch = true;
+                });
+            }
+            if (startText != null)
+            {
+                startText.transform.DOScale(
+                    1.5f,
+                    1f
+                ).SetLoops(
+                    -1,
+                    LoopType.Yoyo
+                );
+            }
         }
 
         void Update()
         {
-            if (!UnityEngine.Rendering.SplashScreen.isFinished)
+            if (!canTouch)
                 return;
             
             // タッチを検出
@@ -34,7 +89,8 @@ namespace System.Scene
                 if (isNextScene)
                     return;
                 isNextScene = true;
-                Sound.PlaySe("jingle_start");
+                characterImage.DOFade(0, 1.0f);
+                startText.DOFade(0, 1.0f);
                 effects.PlayEffects();
                 StartCoroutine(WaitNextScene(1f));
             }
