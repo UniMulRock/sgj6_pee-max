@@ -9,57 +9,45 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1020387235703614}
+  m_RootGameObject: {fileID: 1011432919407556}
   m_IsPrefabParent: 1
---- !u!1 &1020387235703614
+--- !u!1 &1011432919407556
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4834733707012180}
-  - component: {fileID: 114700070757947852}
-  - component: {fileID: 114958886278023772}
+  - component: {fileID: 4146970632770342}
+  - component: {fileID: 114941683377106376}
   m_Layer: 0
-  m_Name: Manager
+  m_Name: EntryPointSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4834733707012180
+--- !u!4 &4146970632770342
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1020387235703614}
+  m_GameObject: {fileID: 1011432919407556}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.8012226, y: -0.8090487, z: -0.052083526}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114700070757947852
+--- !u!114 &114941683377106376
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1020387235703614}
+  m_GameObject: {fileID: 1011432919407556}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b0ba56c4001453588655c6005dea1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114958886278023772
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1020387235703614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d2c29b0f28894579baee518ff8d8eac, type: 3}
+  m_Script: {fileID: 11500000, guid: 241cadf24c2f8413c93e19f1853da600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

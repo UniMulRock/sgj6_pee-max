@@ -12,17 +12,17 @@ namespace Utility.System
         public enum STATE
         {
             BLANK,
+            ENTRY,
             TITLE,
             GAME,
-            RESULT,
         }
 
         Dictionary<STATE, string> SceneName = new Dictionary<STATE, string>
         {
             { STATE.BLANK, "Blank"},
-            { STATE.TITLE, "Title"},
-            { STATE.GAME, "Game" },
-            { STATE.RESULT, "Result"},
+            { STATE.ENTRY, "EntryPointScene"},
+            { STATE.TITLE, "TitleScene"},
+            { STATE.GAME, "InGameScene" },
         };
 
         public STATE state { get; set; }
