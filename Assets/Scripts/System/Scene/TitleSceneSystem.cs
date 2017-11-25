@@ -17,16 +17,10 @@ namespace System.Scene
         private EffectTweener effects;
 
         /// <summary>
-        /// UIキャンバス
-        /// </summary>
-        [SerializeField]
-        private Canvas titleCanvas;
-
-        /// <summary>
         /// キャラクター位置
         /// </summary>
         [SerializeField]
-        private Vector3 characterPosition;
+        private Transform characterPosition;
 
         /// <summary>
         /// キャラクター
@@ -58,7 +52,7 @@ namespace System.Scene
             if (characterImage != null)
             {
                 characterImage.transform.DOMove(
-                    titleCanvas.transform.position + characterPosition,
+                    characterPosition.position,
                     1f
                 ).OnComplete(()=>{
                     // アニメーション終了時
