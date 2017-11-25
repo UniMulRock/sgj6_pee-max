@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: e9a06b55a5d2d4ce2a26629a41e8ad30
+timeCreated: 1511584073
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: AK Elephant3
+  fontNames:
+  - AK Elephant3
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
