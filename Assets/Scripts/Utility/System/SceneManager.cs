@@ -14,6 +14,7 @@ namespace Utility.System
             BLANK,
             ENTRY,
             TITLE,
+            STAGE_SELECT,
             GAME,
         }
 
@@ -22,6 +23,7 @@ namespace Utility.System
             { STATE.BLANK, "Blank"},
             { STATE.ENTRY, "EntryPointScene"},
             { STATE.TITLE, "TitleScene"},
+            { STATE.STAGE_SELECT, "StageSelectScene"},
             { STATE.GAME, "InGameScene" },
         };
 
@@ -33,7 +35,7 @@ namespace Utility.System
 
             DontDestroyOnLoad(gameObject);
 
-            state = STATE.TITLE;
+            state = STATE.ENTRY;
         }
 
         void Update()

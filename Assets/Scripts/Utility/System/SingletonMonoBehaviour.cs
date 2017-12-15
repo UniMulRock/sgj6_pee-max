@@ -41,5 +41,17 @@ namespace Utility.System
                 return;
             }
         }
+
+        public static bool Validation()
+        {
+            Type t = typeof(T);
+
+            instance = (T)FindObjectOfType(t);
+            if (instance == null)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }
