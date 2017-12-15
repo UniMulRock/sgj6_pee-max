@@ -18,6 +18,10 @@ namespace PeeMax.Stage
         [SerializeField]
         private string stageDataName;
 
+        public string StageName{ get{ return stageName; } }
+
+        public string StageDataName{ get{ return stageDataName; } }
+
         public override string ToString()
         {
             return string.Format("uniqueId={0}, stageName={1}, stageDataName={2}", uniqueId, stageName, stageDataName);

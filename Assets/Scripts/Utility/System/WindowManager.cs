@@ -2,6 +2,7 @@
 using UnityEngine.Collections;
 using System.Collections.Generic;
 using Utility.Window;
+using System;
 
 namespace Utility.System
 {
@@ -16,6 +17,7 @@ namespace Utility.System
             SETTING,
             HELP,
             COMPLETION,
+            STAGE,
         }
 
         Dictionary<WINDOW_TYPE, string> WindowName = new Dictionary<WINDOW_TYPE, string>
@@ -24,6 +26,7 @@ namespace Utility.System
             { WINDOW_TYPE.SETTING, "SettingWindow" },
             { WINDOW_TYPE.HELP, "HelpWindow" },
             { WINDOW_TYPE.COMPLETION, "CompletionWindow" },
+            { WINDOW_TYPE.STAGE, "StageWindow" },
         };
 
         Dictionary<WINDOW_TYPE, string> WindowClass = new Dictionary<WINDOW_TYPE, string>
@@ -32,6 +35,7 @@ namespace Utility.System
             { WINDOW_TYPE.SETTING, "SettingWindow" },
             { WINDOW_TYPE.HELP, "HelpWindow" },
             { WINDOW_TYPE.COMPLETION, "CompletionWindow" },
+            { WINDOW_TYPE.STAGE, "StageWindow" },
         };
 
         public WINDOW_TYPE WindowType { get; set; }
@@ -109,12 +113,25 @@ namespace Utility.System
                 {
                     return;
                 }
-                
-                WillOpenWindow(type);
-                windowClass.Open(() =>
-                    {
-                        OpenedWindow();
-                    });
+
+                switch (type)
+                {
+                    case WINDOW_TYPE.STAGE:
+                        WillOpenWindow(type);
+
+                        (windowClass as StageWindow).Open(() =>
+                            {
+                                OpenedWindow();
+                            });
+                        break;
+                    default:
+                        WillOpenWindow(type);
+                        windowClass.Open(() =>
+                            {
+                                OpenedWindow();
+                            });
+                        break;
+                }
             }
         }
 
@@ -145,11 +162,23 @@ namespace Utility.System
 
             if (!IsExecuteWindow)
             {
-                WillCloseWindow();
-                windowClass.Close(() =>
-                    {
-                        ClosedWindow();
-                    });
+                switch (type)
+                {
+                    case WINDOW_TYPE.STAGE:
+                        WillCloseWindow();
+                        (windowClass as StageWindow).Close(() =>
+                            {
+                                ClosedWindow();
+                            });
+                        break;
+                    default:
+                        WillCloseWindow();
+                        windowClass.Close(() =>
+                            {
+                                ClosedWindow();
+                            });
+                        break;
+                }
             }
         }
 

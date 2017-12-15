@@ -53,6 +53,7 @@ namespace Utility.Window
         {
             if (ScreenRoot == null)
                 return;
+            
             Sequence seq = DOTween.Sequence();
             seq.Append
             (
