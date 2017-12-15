@@ -11,25 +11,38 @@ namespace Utility.System
 
         public enum WINDOW_TYPE
         {
+            NONE,
             BASE,
             SETTING,
+            HELP,
+            COMPLETION,
         }
 
         Dictionary<WINDOW_TYPE, string> WindowName = new Dictionary<WINDOW_TYPE, string>
         {
             { WINDOW_TYPE.BASE, "BaseWindow" },
             { WINDOW_TYPE.SETTING, "SettingWindow" },
+            { WINDOW_TYPE.HELP, "HelpWindow" },
+            { WINDOW_TYPE.COMPLETION, "CompletionWindow" },
         };
 
         Dictionary<WINDOW_TYPE, string> WindowClass = new Dictionary<WINDOW_TYPE, string>
         {
             { WINDOW_TYPE.BASE, "WindowBase" },
             { WINDOW_TYPE.SETTING, "SettingWindow" },
+            { WINDOW_TYPE.HELP, "HelpWindow" },
+            { WINDOW_TYPE.COMPLETION, "CompletionWindow" },
         };
 
         public WINDOW_TYPE WindowType { get; set; }
 
         public GameObject WindowRoot{ get; set; }
+
+        public WINDOW_TYPE NextWindowType{ get; set; }
+
+        public WINDOW_TYPE CurrentWindowType{ get; set; }
+
+        public bool IsExecuteWindow{ get; set; }
 
         new void Awake()
         {
@@ -37,9 +50,9 @@ namespace Utility.System
             DontDestroyOnLoad(gameObject);
         }
 
-        public GameObject CreateWindow(WINDOW_TYPE type)
+        public Transform CreateWindow(WINDOW_TYPE type)
         {
-            if (WindowRoot == null)
+            if (WindowRoot == null || type == WINDOW_TYPE.NONE)
                 return null;
 
             var window = Resources.Load(WINDOW_DIC + WindowName[type]) as GameObject;
@@ -47,7 +60,7 @@ namespace Utility.System
             {
                 var instantiateObject = Instantiate(window, WindowRoot.transform);
                 instantiateObject.name = WindowName[type];
-                return instantiateObject;
+                return instantiateObject.transform;
             }
             else
             {
@@ -56,51 +69,72 @@ namespace Utility.System
             return null;
         }
 
-        public void OpenWindow(WINDOW_TYPE type)
+        public void OpenWindow(WINDOW_TYPE type, bool isForce = false)
         {
-            if (WindowRoot == null)
+            if (WindowRoot == null || type == WINDOW_TYPE.NONE)
                 return;
             
-            GameObject child;
+            Transform childTransform;
             if (WindowRoot.transform.childCount > 0)
             {
-                child = WindowRoot.transform.Find(WindowName[type]).gameObject;
-                if (child == null)
+                childTransform = WindowRoot.transform.Find(WindowName[type]);
+                if (childTransform == null)
                 {
-                    child = CreateWindow(type);
-                    if (child == null)
+                    childTransform = CreateWindow(type);
+                    if (childTransform == null)
                         return;
                 }
             }
             else
             {
-                child = CreateWindow(type);
-                if (child == null)
+                childTransform = CreateWindow(type);
+                if (childTransform == null)
                     return;
             }
 
-            var windowClass = child.GetComponent(WindowClass[type]) as WindowBase;
+            var windowClass = childTransform.gameObject.GetComponent(WindowClass[type]) as WindowBase;
             if (windowClass == null)
                 return;
-            
-            switch (type)
+
+            if (!IsExecuteWindow)
             {
-                case WINDOW_TYPE.BASE:
-                    if(windowClass is WindowBase)
+                if (isForce)
+                {
+                    if (CurrentWindowType != WINDOW_TYPE.NONE)
                     {
-                        (windowClass as WindowBase).Open();
+                        CloseWindow(CurrentWindowType);
                     }
-                    break;
-                default:
-                    windowClass.Open();
-                    break;
+                }
+                else if (CurrentWindowType != WINDOW_TYPE.NONE)
+                {
+                    return;
+                }
+                
+                WillOpenWindow(type);
+                windowClass.Open(() =>
+                    {
+                        OpenedWindow();
+                    });
             }
+        }
+
+        private void WillOpenWindow(WINDOW_TYPE type)
+        {
+            IsExecuteWindow = true;
+            NextWindowType = type;
+        }
+
+        private void OpenedWindow()
+        {
+            IsExecuteWindow = false;
+            CurrentWindowType = NextWindowType;
         }
 
         public void CloseWindow(WINDOW_TYPE type)
         {
-            if (WindowRoot == null)
+            if (WindowRoot == null || type == WINDOW_TYPE.NONE)
                 return;
+            
             var child = WindowRoot.transform.Find(WindowName[type]).gameObject;
             if (child == null)
                 return;
@@ -108,18 +142,27 @@ namespace Utility.System
             var windowClass = child.GetComponent(WindowClass[type]) as WindowBase;
             if (windowClass == null)
                 return;
-            switch (type)
+
+            if (!IsExecuteWindow)
             {
-                case WINDOW_TYPE.BASE:
-                    if(windowClass is WindowBase)
+                WillCloseWindow();
+                windowClass.Close(() =>
                     {
-                        (windowClass as WindowBase).Close();
-                    }
-                    break;
-                default:
-                    windowClass.Close();
-                    break;
+                        ClosedWindow();
+                    });
             }
+        }
+
+        private void WillCloseWindow()
+        {
+            IsExecuteWindow = true;
+            NextWindowType = WINDOW_TYPE.NONE;
+        }
+
+        private void ClosedWindow()
+        {
+            IsExecuteWindow = false;
+            CurrentWindowType = NextWindowType;
         }
     }
 }
