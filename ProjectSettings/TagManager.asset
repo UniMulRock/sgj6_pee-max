@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: WindowBackground
+    uniqueID: 440561405
+    locked: 0
+  - name: Window
+    uniqueID: 3922635267
+    locked: 0

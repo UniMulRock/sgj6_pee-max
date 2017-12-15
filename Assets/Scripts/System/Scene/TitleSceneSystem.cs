@@ -97,7 +97,7 @@ namespace System.Scene
 
         private void NextScene()
         {
-            SceneManager.Instance.ChangeState(SceneManager.STATE.GAME);
+            SceneManager.Instance.ChangeState(SceneManager.STATE.STAGE_SELECT);
             Sound.StopBgm();
         }
     }
