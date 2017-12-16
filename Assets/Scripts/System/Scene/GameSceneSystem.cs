@@ -2,6 +2,7 @@
 using UnityEngine;
 using PeeMax.Char;
 using PeeMax.Stage;
+using UnityStandardAssets.Cameras;
 
 namespace System.Scene
 {
@@ -19,6 +20,15 @@ namespace System.Scene
         [SerializeField]
         private GameObject charRoot;
 
+        [SerializeField]
+        private AutoCam autoCam;
+
+        public Transform CamTarget
+        {
+            get{ return autoCam.Target; }
+            set{ autoCam.SetTarget(value); }
+        }
+
         protected override void Awake()
         {
             if (WindowManager.Validation())
@@ -28,7 +38,8 @@ namespace System.Scene
 
             if (CharGenerater.Validation())
             {
-                CharGenerater.Instance.CreateChar(charRoot.transform);
+                var character = CharGenerater.Instance.CreateChar(charRoot.transform);
+                CamTarget = character.transform;
             }
 
             if (StageGenerater.Validation())
