@@ -11,6 +11,12 @@ namespace PeeMax.Icon
         [SerializeField]
         private List<IconData> iconDataList;
 
+		public Sprite GetIconSprite(int uniqueId)
+		{
+			var findData = iconDataList.Find((data)=>data.UniqueId==uniqueId);
+			return findData.ImageResource;
+		}
+
         protected override void Awake()
         {
             DontDestroyOnLoad(gameObject);

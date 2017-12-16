@@ -4,6 +4,7 @@ using System.Scene;
 using System;
 using PeeMax.Stage;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 namespace Utility.Window
 {
@@ -11,6 +12,11 @@ namespace Utility.Window
     {
         [SerializeField]
         private Text stageNameText;
+
+        [SerializeField]
+        private GameObject iconRoot;
+
+        private List<GameObject> iconObjList = new List<GameObject>();
 
         public void OnClose()
         {
@@ -36,7 +42,7 @@ namespace Utility.Window
                     {
                         StageSelectSceneSystem.Instance.CurrentStageData = null;
                     }
-                    if(callback != null)
+                    if (callback != null)
                     {
                         callback();
                     }
@@ -51,6 +57,20 @@ namespace Utility.Window
 
         public void Setup(StageData data)
         {
+            if (iconObjList == null)
+            {
+                iconObjList = new List<GameObject>();
+            }
+            else
+            {
+                iconObjList.ForEach((image) =>
+                    {
+                        Destroy(image.gameObject);
+                    });
+                iconObjList.Clear();
+            }
+
+
             if (data == null)
                 return;
 
@@ -58,6 +78,40 @@ namespace Utility.Window
             {
                 stageNameText.text = data.StageName;
             }
+
+            if (iconRoot != null)
+            {
+                data.IconList.ForEach((sprite) =>
+                    {
+                        var imageObj = CreateIcon(sprite);
+                        if (imageObj != null)
+                        {
+                            iconObjList.Add(imageObj);
+                        }
+                    });
+            }
+        }
+
+        private GameObject CreateIcon(Sprite sprite)
+        {
+            var iconImageRsource = UnityEngine.Resources.Load(StageDataDefine.STAGE_SELECT_DIC + StageDataDefine.ICON_IMAGE) as GameObject;
+            if (iconImageRsource == null)
+            {
+                Debug.LogError("【ロード失敗】" + StageDataDefine.STAGE_SELECT_DIC + StageDataDefine.ICON_IMAGE);
+                return null;
+            }
+            var instanceIconImage = Instantiate(iconImageRsource, iconRoot.transform) as GameObject;
+            if (instanceIconImage == null)
+            {
+                Debug.LogError("【生成失敗】" + StageDataDefine.STAGE_SELECT_DIC + StageDataDefine.ICON_IMAGE);
+                return null;
+            }
+            instanceIconImage.name = StageDataDefine.ICON_IMAGE + "_" + sprite.name;
+            var instanceIconImageSrc = instanceIconImage.transform.GetChild(0).GetComponentInChildren<Image>();
+            if (instanceIconImageSrc == null)
+                return null;
+            instanceIconImageSrc.sprite = sprite;
+            return instanceIconImage;
         }
     }
 }

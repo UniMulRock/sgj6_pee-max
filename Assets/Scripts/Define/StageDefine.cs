@@ -16,6 +16,8 @@
 
         public const string STAGE_SELECT_BUTTON = "StageSelectButton";
 
+        public const string ICON_IMAGE = "IconImage";
+
         public const string IMAGE_DIC = "Images/";
 
         public const string GAME_DIC = "Game/";
