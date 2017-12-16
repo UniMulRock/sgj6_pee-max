@@ -3,5 +3,6 @@
 
 	public class SaveData
 	{
+		public int stageUniqueId;
 	}
 }

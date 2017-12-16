@@ -9,7 +9,7 @@ namespace Utility.System
 	{
 		public void SaveStageId(SaveData data)
 		{
-			PlayerPrefs.SetInt(StageDataDefine.STAGE_ID_KEY, data);
+			PlayerPrefs.SetInt(StageDataDefine.STAGE_ID_KEY, data.stageUniqueId);
 			PlayerPrefs.Save();
 		}
 
