@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 using PeeMax.Stage;
+using PeeMax.Icon;
 
 namespace System.Scene
 {
@@ -113,6 +114,19 @@ namespace System.Scene
 
         private void CreateStageButton(int pageValue, int buttonValue, StageData data)
         {
+            if (data.IconList == null)
+            {
+                data.IconList = new List<Sprite>();
+            }
+
+            if (IconManager.Validation())
+            {
+                for (int i = 0; i < data.IconUniqueIdArray.Length; i++)
+                {
+                    data.IconList.Add(IconManager.Instance.GetIconSprite(data.IconUniqueIdArray[i]));
+                }
+            }
+
             stageButtonList[pageValue].Add(data);
             var stageButton = UnityEngine.Resources.Load(StageDataDefine.STAGE_SELECT_DIC + StageDataDefine.STAGE_SELECT_BUTTON) as GameObject;
             if (stageButton == null)
@@ -136,6 +150,7 @@ namespace System.Scene
             stageSelectButtonDic[pageValue].Add(instanceStageButtonSrc);
             instanceStageButtonSrc.Setup();
         }
+
         #endregion
     }
 }

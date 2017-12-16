@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace PeeMax.Stage
 {
@@ -18,9 +19,25 @@ namespace PeeMax.Stage
 		[SerializeField]
 		private string stageDataName;
 
+		[CsvColumnAttribute(3)]
+		[SerializeField]
+		private int iconUniqueId01;
+
+		[CsvColumnAttribute(4)]
+		[SerializeField]
+		private int iconUniqueId02;
+
+		[CsvColumnAttribute(5)]
+		[SerializeField]
+		private int iconUniqueId03;
+
+		public int[] IconUniqueIdArray{ get{ return new int[]{iconUniqueId01,iconUniqueId02,iconUniqueId03}; } }
+
 		public string StageName{ get { return stageName; } }
 
 		public string StageDataName{ get { return stageDataName; } }
+
+		public List<Sprite> IconList{ get; set; }
 
 		public override string ToString()
 		{
