@@ -5,7 +5,7 @@ using Utility.System;
 
 namespace Utility.System
 {
-	public class SaveManager : SingletonMonoBehaviour <SaveManager> 
+	public class SaveManager : SingletonMonoBehaviour <SaveManager>
 	{
 		public void SaveStageId(SaveData data)
 		{
@@ -15,12 +15,12 @@ namespace Utility.System
 
 		public int LoadStageId()
 		{
-			return PlayerPrefs.GetInt (StageDataDefine.STAGE_ID_KEY, 0);
+			return PlayerPrefs.GetInt(StageDataDefine.STAGE_ID_KEY, 0);
 		}
 
-		public void ClearPrefs ()
+		public void ClearPrefs()
 		{
-			PlayerPrefs.DeleteAll ();
+			PlayerPrefs.DeleteAll();
 		}
 	}
 }
