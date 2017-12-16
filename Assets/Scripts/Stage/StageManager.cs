@@ -12,6 +12,9 @@ namespace PeeMax.Stage
 		[SerializeField]
 		private StartData startPoint;
 
+		/// <summary>
+		/// 終了位置
+		/// </summary>
 		[SerializeField]
 		private List<GoalData> goalPointList;
 	}

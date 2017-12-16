@@ -13,5 +13,7 @@
         public const string STAGE_LIST_ROOT = "StageListRoot";
 
         public const string STAGE_SELECT_BUTTON = "StageSelectButton";
+
+		public const string STAGE_ID_KEY = "stageId";
     }
 }
