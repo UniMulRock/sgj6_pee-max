@@ -52,3 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   windowRoot: {fileID: 0}
+  StageSelectRoot: {fileID: 0}
+  stageDataList: []
+  bgmName: SGJ Title

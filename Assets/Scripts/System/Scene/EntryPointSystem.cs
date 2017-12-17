@@ -1,5 +1,6 @@
 ﻿using UnityEngine.Rendering;
 using Utility.System;
+using UnityEngine;
 
 namespace System.Scene
 {
@@ -36,7 +37,7 @@ namespace System.Scene
         /// </summary>
         private void NextScene()
         {
-            SceneManager.Instance.ChangeState(SceneManager.STATE.TITLE);
+            SceneManager.Instance.ChangeState(SceneManager.STATE.TITLE_CREDIT);
         }
     }
 }

@@ -7,18 +7,20 @@ namespace Utility.System
 {
 	public class SaveManager : SingletonMonoBehaviour <SaveManager>
 	{
-		public void SaveStageId(SaveData data)
+        
+		public void Save(SaveData data)
 		{
 			PlayerPrefs.SetInt(StageDataDefine.STAGE_ID_KEY, data.stageUniqueId);
 			PlayerPrefs.Save();
 		}
 
-		public int LoadStageId()
+		public int Load()
 		{
 			return PlayerPrefs.GetInt(StageDataDefine.STAGE_ID_KEY, 0);
 		}
 
-		public void ClearPrefs()
+        [ContextMenu("DeletePrefs")]
+		public void DeletePrefs()
 		{
 			PlayerPrefs.DeleteAll();
 		}

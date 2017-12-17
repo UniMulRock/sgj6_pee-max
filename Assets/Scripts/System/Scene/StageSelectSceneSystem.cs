@@ -27,6 +27,9 @@ namespace System.Scene
         [SerializeField]
         private List<StageData> stageDataList = new List<StageData>();
 
+        [SerializeField]
+        private string bgmName;
+
         private Dictionary<int, List<StageData>> stageButtonList = new Dictionary<int, List<StageData>>();
 
         private Dictionary<int, Transform> stageSelectPageDic = new Dictionary<int, Transform>();
@@ -52,6 +55,11 @@ namespace System.Scene
                         Debug.Log(data.ToString());
                     });
             }
+        }
+
+        private void Start()
+        {
+            Sound.PlayBgm(bgmName);
         }
 
         public void OnSetting()
