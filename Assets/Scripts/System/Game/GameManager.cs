@@ -1,21 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace PeeMax.System
 {
 
 	public class GameManager : Utility.System.SingletonMonoBehaviour<GameManager> {
 
+		public GameObject PrefabEvent;
+		public GameObject PrefabInput;
 
 		public List<GameObject> SelectedCommands = new List<GameObject>();
 
 		public int IndexOfCurrentCommand;
 
+		public float startDelay = 2f;
+		public float endDelay = 2f;
+		private WaitForSeconds startWait;
+		private WaitForSeconds endWait;
+
 
 		// Use this for initialization
 		void Start () {
 			IndexOfCurrentCommand = 0;
+
+			startWait = new WaitForSeconds(startDelay);
+			endWait = new WaitForSeconds(endDelay);
+			StartCoroutine(MainLoop());
 		}
 
 		// Update is called once per frame
@@ -77,6 +90,85 @@ namespace PeeMax.System
 			}
 		}
 
+		/// <summary>
+		/// 導入イベント
+		/// </summary>
+		/// <returns>The event command.</returns>
+		private IEnumerator PhaseEventCommand()
+		{
+			GameObject preObj = null;
+
+			//導入イベント画面
+			if (PrefabEvent != null) {
+				preObj = GameObject.Instantiate (PrefabEvent);
+			}
+
+			// 終わるまで待つ
+			while (preObj != null)
+			{
+				if (Input.anyKey) {
+					GameObject.Destroy (preObj);
+					break;
+				}
+				yield return null;
+			}
+			yield return null;
+		}
+
+		/// <summary>
+		/// コマンド入力
+		/// </summary>
+		/// <returns>The input command.</returns>
+		private IEnumerator PhaseInputCommand()
+		{
+			GameObject preObj = null;
+			EndInputCommand inpObj = null;
+
+			//Command Input
+			if (PrefabInput != null) {
+				preObj = GameObject.Instantiate (PrefabInput);
+				inpObj = preObj.GetComponent<EndInputCommand> () as EndInputCommand;
+			}
+
+			// 終わるまで待つ
+			while (preObj != null)
+			{
+				if (inpObj.IsEndOfInputCommand) {
+					GameObject.Destroy (preObj);
+					break;
+				}
+				yield return null;
+			}
+			yield return null;
+		}
+
+		private IEnumerator MainLoop()
+		{
+			while (true) {
+
+				yield return startWait;
+
+				// 導入イベント
+				yield return StartCoroutine (PhaseEventCommand ());
+
+				// コマンド入力
+				yield return StartCoroutine (PhaseInputCommand ());
+
+				yield return startWait;
+
+				//ゲーム終了まで末
+				while (true) {
+
+					// ゴール到達したか？
+
+					// 成功？失敗？
+
+					// ステージセレクト、エンディング、タイトルへ
+
+					yield return null;
+				}
+			}
+		}
 	}
 
 }
