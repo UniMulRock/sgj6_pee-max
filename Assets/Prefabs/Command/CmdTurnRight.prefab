@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 222336928287552568}
   - component: {fileID: 114627468931916256}
   - component: {fileID: 114719738025852646}
+  - component: {fileID: 114493557168411496}
   m_Layer: 5
   m_Name: CmdTurnRight
   m_TagString: Untagged
@@ -29,6 +30,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114493557168411496
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1925961943086902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4e32cfe784d64787847f79bec240ce8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114627468931916256
 MonoBehaviour:
   m_ObjectHideFlags: 1

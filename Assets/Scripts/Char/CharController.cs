@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PeeMax.Char
 {
-    public class CharController : MonoBehaviour, CharControllerInterface
+	public abstract class CharController : MonoBehaviour
     {
         void Awake()
         {
@@ -13,39 +13,14 @@ namespace PeeMax.Char
 
         void Update()
         {
-            Do();
-            if (IsDone() == true)
-            {
-                // Next command
-            }
-        }
+			
+		}
 
-        public virtual bool IsDone(){
-            return true;
-        }
+		public abstract bool IsDone ();
 
-        public virtual void Do(){}
+		public abstract void Init (MonoBehaviour parent);
 
-        [ContextMenu("Move")]
-        public virtual void Move()
-        {
-            // 前進
-            transform.Translate(new Vector3(0,0,CharDefine.MOVE_SPEED));
-        }
-
-        [ContextMenu("TurnLeft")]
-        public virtual void TurnLeft()
-        {
-            // 左
-            transform.Rotate(new Vector3(0,CharDefine.TURN_LEFT,0));
-        }
-
-        [ContextMenu("TurnRight")]
-        public virtual void TurnRight()
-        {
-            // 右
-            transform.Rotate(new Vector3(0,CharDefine.TURN_RIGHT,0));
-        }
+		public abstract void Do (MonoBehaviour parent);
         
     }
 }

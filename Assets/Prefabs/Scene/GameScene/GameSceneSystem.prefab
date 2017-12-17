@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114226912738963732}
   - component: {fileID: 114913757012440852}
   - component: {fileID: 114213737273976606}
+  - component: {fileID: 114836051819107166}
   m_Layer: 0
   m_Name: GameSceneSystem
   m_TagString: Untagged
@@ -67,6 +68,20 @@ MonoBehaviour:
   windowRoot: {fileID: 0}
   stageRoot: {fileID: 0}
   charRoot: {fileID: 0}
+  autoCam: {fileID: 0}
+--- !u!114 &114836051819107166
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1720367179104734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90ef0390dad384acd828322e11e5af92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedCommands: []
+  IndexOfCurrentCommand: 0
 --- !u!114 &114913757012440852
 MonoBehaviour:
   m_ObjectHideFlags: 1
