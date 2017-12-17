@@ -57,5 +57,5 @@ MonoBehaviour:
   TitleImage: {fileID: 0}
   canvasGroup: {fileID: 0}
   startText: {fileID: 0}
-  bgmName: SGJ DirectionsView
+  bgmName: SGJ Title
   seName: SGJ footsteps (stairs) 2

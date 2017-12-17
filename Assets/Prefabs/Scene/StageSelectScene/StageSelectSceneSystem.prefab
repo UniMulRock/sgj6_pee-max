@@ -54,4 +54,4 @@ MonoBehaviour:
   windowRoot: {fileID: 0}
   StageSelectRoot: {fileID: 0}
   stageDataList: []
-  bgmName: SGJ DirectionsView
+  bgmName: SGJ Title
