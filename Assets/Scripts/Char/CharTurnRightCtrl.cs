@@ -6,19 +6,28 @@ namespace PeeMax.Char
 {
 	public class CharTurnRightCtrl : CharController {
 
+		float moveTime;
+		bool isend = false;
+
 		public override bool IsDone ()
 		{
-			return false;
+			return isend;
 		}
 
-		public override void Init (MonoBehaviour parent)
+		public override void Init (GameObject parent)
 		{
 		}
 
-		public override void Do (MonoBehaviour parent)
+		public override void Do (GameObject parent)
 		{
-			// 右
-			parent.transform.Rotate(new Vector3(0,CharDefine.TURN_RIGHT,0));
+			if (moveTime <= 1.0f) {
+				moveTime += Time.deltaTime;
+
+				// 左
+				parent.transform.Rotate (new Vector3 (0, CharDefine.TURN_RIGHT, 0) * Time.deltaTime);
+			} else {
+				isend = true;
+			}
 		}
 	}
 
