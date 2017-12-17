@@ -37,7 +37,7 @@ namespace System.Scene
         /// </summary>
         private void NextScene()
         {
-            SceneManager.Instance.ChangeState(SceneManager.STATE.TITLE);
+            SceneManager.Instance.ChangeState(SceneManager.STATE.TITLE_CREDIT);
         }
     }
 }

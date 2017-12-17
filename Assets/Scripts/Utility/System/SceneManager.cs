@@ -13,6 +13,7 @@ namespace Utility.System
         {
             BLANK,
             ENTRY,
+            TITLE_CREDIT,
             TITLE,
             STAGE_SELECT,
             GAME,
@@ -22,6 +23,7 @@ namespace Utility.System
         {
             { STATE.BLANK, "Blank"},
             { STATE.ENTRY, "EntryPointScene"},
+            { STATE.TITLE_CREDIT, "TitleCreditScene"},
             { STATE.TITLE, "TitleScene"},
             { STATE.STAGE_SELECT, "StageSelectScene"},
             { STATE.GAME, "InGameScene" },
