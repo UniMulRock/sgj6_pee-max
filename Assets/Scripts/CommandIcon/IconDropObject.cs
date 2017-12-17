@@ -19,7 +19,8 @@ public class IconDropObject : MonoBehaviour, IDropHandler, IPointerEnterHandler,
 		if (cmdObj != null) {
 			Image droppedImage = cmdObj.GetComponent<Image>();
 			iconImage.sprite = droppedImage.sprite;
-			iconImage.color = Vector4.one * 0.6f;
+			iconImage.color = Vector4.one;
+			nowSprite = iconImage.sprite;
 		}
     }
 
