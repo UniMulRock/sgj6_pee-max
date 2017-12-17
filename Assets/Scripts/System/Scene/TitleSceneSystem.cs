@@ -28,6 +28,12 @@ namespace System.Scene
         [SerializeField]
         private Image characterImage;
 
+        [SerializeField]
+        private Image TitleImage;
+
+        [SerializeField]
+        private CanvasGroup canvasGroup;
+
         /// <summary>
         /// テキスト
         /// </summary>
@@ -49,6 +55,10 @@ namespace System.Scene
             canTouch = false;
             effects.SetHidden(false);
             isNextScene = false;
+            if (canvasGroup != null)
+            {
+                canvasGroup.DOFade(1f, 1f).Complete();
+            }
             if (characterImage != null)
             {
                 characterImage.transform.DOMove(
@@ -69,6 +79,20 @@ namespace System.Scene
                     LoopType.Yoyo
                 );
             }
+
+            if (TitleImage != null)
+            {
+                TitleImage.transform.DOScale(0f, 1f).Complete();
+                TitleImage.DOFade(0f, 1f).Complete();
+                TitleImage.transform.DOScale(
+                    1f,
+                    1.5f
+                );
+                TitleImage.DOFade(
+                    1f,
+                    1.5f
+                );
+            }
         }
 
         void Update()
@@ -83,8 +107,7 @@ namespace System.Scene
                 if (isNextScene)
                     return;
                 isNextScene = true;
-                characterImage.DOFade(0, 1.0f);
-                startText.DOFade(0, 1.0f);
+                canvasGroup.DOFade(0, 1.0f);
                 effects.PlayEffects();
                 StartCoroutine(WaitNextScene(1f));
             }
