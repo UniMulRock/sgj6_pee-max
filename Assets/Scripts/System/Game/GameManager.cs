@@ -16,8 +16,8 @@ namespace PeeMax.System
 
 		public int IndexOfCurrentCommand;
 
-		public float delayTime = 2f;
-		private WaitForSeconds delayWait;
+		float delayTime = 2f;
+		WaitForSeconds delayWait;
 
 
 		// Use this for initialization
@@ -38,7 +38,7 @@ namespace PeeMax.System
 		/// </summary>
 		/// <param name="cmdObject">Cmd object.</param>
 		/// <param name="index">Index.</param>
-		void InsertSelectedCommand(GameObject cmdObject, int index=-1)
+		public void InsertSelectedCommand(GameObject cmdObject, int index=-1)
 		{
 			var cmd = cmdObject.GetComponent<PeeMax.Char.CharController> () as PeeMax.Char.CharController;
 			if (cmd == null) {
@@ -56,7 +56,7 @@ namespace PeeMax.System
 		/// <summary>
 		/// Clears the seleced command.
 		/// </summary>
-		void ClearSelecedCommand()
+		public void ClearSelecedCommand()
 		{
 			SelectedCommands.Clear ();
 			IndexOfCurrentCommand = 0;

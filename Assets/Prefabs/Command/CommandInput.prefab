@@ -553,6 +553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c018b1ba6016c4e9dcd53f4d49e5de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Index: 7
   iconImage: {fileID: 114951966762185686}
 --- !u!114 &114062087733243214
 MonoBehaviour:
@@ -642,6 +643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c018b1ba6016c4e9dcd53f4d49e5de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Index: 2
   iconImage: {fileID: 114176318149777978}
 --- !u!114 &114108113789449916
 MonoBehaviour:
@@ -867,6 +869,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c018b1ba6016c4e9dcd53f4d49e5de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Index: 5
   iconImage: {fileID: 114237248427807666}
 --- !u!114 &114292409759920128
 MonoBehaviour:
@@ -993,6 +996,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c018b1ba6016c4e9dcd53f4d49e5de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Index: 0
   iconImage: {fileID: 114235631398337336}
 --- !u!114 &114532285657493980
 MonoBehaviour:
@@ -1185,6 +1189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c018b1ba6016c4e9dcd53f4d49e5de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Index: 6
   iconImage: {fileID: 114258158933204646}
 --- !u!114 &114703944627820910
 MonoBehaviour:
@@ -1299,6 +1304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c018b1ba6016c4e9dcd53f4d49e5de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Index: 3
   iconImage: {fileID: 114891272086616602}
 --- !u!114 &114790166406854072
 MonoBehaviour:
@@ -1322,6 +1328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c018b1ba6016c4e9dcd53f4d49e5de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Index: 1
   iconImage: {fileID: 114172988861239360}
 --- !u!114 &114811242562602226
 MonoBehaviour:
@@ -1590,6 +1597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c018b1ba6016c4e9dcd53f4d49e5de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Index: 4
   iconImage: {fileID: 114532285657493980}
 --- !u!114 &114957224639992102
 MonoBehaviour:
