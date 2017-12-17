@@ -1,5 +1,6 @@
 ﻿using UnityEngine.Rendering;
 using Utility.System;
+using UnityEngine;
 
 namespace System.Scene
 {

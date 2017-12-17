@@ -12,8 +12,8 @@ namespace Utility.System
         const int MAX_SE = 5;
         const int MAX_VOICE = 5;
         const float DEFAULT_VOLUME_BGM = 0.3f;
-        const float DEFAULT_VOLUME_SE = 0.3f;
-        const float DEFAULT_VOLUME_VOICE = 0.9f;
+        const float DEFAULT_VOLUME_SE = 0.5f;
+        const float DEFAULT_VOLUME_VOICE = 0.5f;
 
 
         // シングルトン
@@ -243,7 +243,6 @@ namespace Utility.System
         {
             _sourceBgm.Stop();
         }
-
 
         public static bool IsPlayingBgm()
         {

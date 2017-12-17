@@ -40,6 +40,12 @@ namespace System.Scene
         [SerializeField]
         private UnityEngine.UI.Text startText;
 
+        [SerializeField]
+        private string bgmName;
+
+        [SerializeField]
+        private string seName;
+
         /// <summary>
         /// 遷移が呼ばれているか
         /// </summary>
@@ -93,6 +99,7 @@ namespace System.Scene
                     1.5f
                 );
             }
+            Sound.PlayBgm(bgmName);
         }
 
         void Update()
@@ -108,6 +115,7 @@ namespace System.Scene
                     return;
                 isNextScene = true;
                 canvasGroup.DOFade(0, 1.0f);
+                Sound.PlaySe(seName);
                 effects.PlayEffects();
                 StartCoroutine(WaitNextScene(1f));
             }

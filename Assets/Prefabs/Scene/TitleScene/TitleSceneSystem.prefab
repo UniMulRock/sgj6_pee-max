@@ -54,4 +54,8 @@ MonoBehaviour:
   effects: {fileID: 0}
   characterPosition: {fileID: 0}
   characterImage: {fileID: 0}
+  TitleImage: {fileID: 0}
+  canvasGroup: {fileID: 0}
   startText: {fileID: 0}
+  bgmName: SGJ DirectionsView
+  seName: SGJ footsteps (stairs) 2

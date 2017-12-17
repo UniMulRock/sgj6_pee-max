@@ -69,6 +69,7 @@ MonoBehaviour:
   stageRoot: {fileID: 0}
   charRoot: {fileID: 0}
   autoCam: {fileID: 0}
+  bgmName: SGJ DirectionsView
 --- !u!114 &114836051819107166
 MonoBehaviour:
   m_ObjectHideFlags: 1
