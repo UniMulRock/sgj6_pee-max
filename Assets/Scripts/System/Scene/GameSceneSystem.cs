@@ -1,4 +1,5 @@
 ﻿using Utility.System;
+using Utility.System.Data;
 using UnityEngine;
 using PeeMax.Char;
 using PeeMax.Stage;
@@ -23,6 +24,9 @@ namespace System.Scene
         [SerializeField]
         private AutoCam autoCam;
 
+        [SerializeField]
+        private string bgmName;
+
         public Transform CamTarget
         {
             get{ return autoCam.Target; }
@@ -46,6 +50,28 @@ namespace System.Scene
             {
                 StageGenerater.Instance.CreateStage(stageRoot.transform,"test1");
             }
+        }
+
+        private void Start()
+        {
+            Sound.PlayBgm(bgmName);
+        }
+
+        public void GoToNextScene()
+        {
+            if (SaveManager.Validation())
+            {
+                var clearedId = SaveManager.Instance.Load();
+                if (clearedId > 0)
+                {
+                    SaveData saveData = new SaveData();
+                    saveData.stageUniqueId = 0;
+                    // オートセーブ
+                    SaveManager.Instance.Save(saveData);
+                }
+            }
+            SceneManager.Instance.ChangeState(SceneManager.STATE.STAGE_SELECT);
+            Sound.StopBgm();
         }
     }
 }
