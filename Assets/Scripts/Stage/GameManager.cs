@@ -78,6 +78,8 @@ namespace PeeMax.Stage
 						controll = GetCurrentCharController();
 						if (controll == null) {
 							// 全コマンド実行完了 -> トイレに到達
+
+							StartCoroutine (PhaseSuccessCommand ());
 						}
 					}
 				}
@@ -192,6 +194,29 @@ namespace PeeMax.Stage
 			yield return null;
 		}
 
+		private IEnumerator PhaseSuccessCommand()
+		{
+			GameObject preObj = null;
+
+			//導入イベント画面
+			if (PrefabEvent != null) {
+				preObj = GameObject.Instantiate (PrefabSuccess);
+			}
+
+			// 終わるまで待つ
+			while (preObj != null)
+			{
+				if (Input.anyKey) {
+					GameObject.Destroy (preObj);
+
+					Utility.System.Sound.StopBgm ();
+					Utility.System.SceneManager.Instance.ChangeState(Utility.System.SceneManager.STATE.STAGE_SELECT);
+					break;
+				}
+				yield return null;
+			}
+			yield return null;
+		}
 
 		#endregion
 
