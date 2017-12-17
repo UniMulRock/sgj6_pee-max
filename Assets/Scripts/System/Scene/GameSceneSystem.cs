@@ -39,7 +39,7 @@ namespace System.Scene
             if (CharGenerater.Validation())
             {
                 var character = CharGenerater.Instance.CreateChar(charRoot.transform);
-                CamTarget = character.transform;
+				CamTarget = charRoot.transform;//character.transform;
             }
 
             if (StageGenerater.Validation())
