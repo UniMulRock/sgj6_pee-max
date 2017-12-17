@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114662942041257290}
   - component: {fileID: 95036651442066764}
   m_Layer: 5
-  m_Name: Fail 1
+  m_Name: Fail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

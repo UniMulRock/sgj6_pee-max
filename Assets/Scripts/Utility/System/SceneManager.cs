@@ -17,6 +17,7 @@ namespace Utility.System
             TITLE,
             STAGE_SELECT,
             GAME,
+			STAFFROLL,
         }
 
         Dictionary<STATE, string> SceneName = new Dictionary<STATE, string>
@@ -27,6 +28,7 @@ namespace Utility.System
             { STATE.TITLE, "TitleScene"},
             { STATE.STAGE_SELECT, "StageSelectScene"},
             { STATE.GAME, "InGameScene" },
+			{ STATE.STAFFROLL, "StaffRoll" },
         };
 
         public STATE state { get; set; }

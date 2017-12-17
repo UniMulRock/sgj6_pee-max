@@ -81,10 +81,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90ef0390dad384acd828322e11e5af92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PrefabEvent: {fileID: 0}
+  PrefabEvent: {fileID: 1691557996079842, guid: ee01be9ab49dda040a62aa3e7ab5ae45,
+    type: 2}
   PrefabInput: {fileID: 1307781177960284, guid: 2d3b29133fd5541cba5ffab054e6a1b3,
     type: 2}
+  PrefabAsk: {fileID: 1622319619697692, guid: 9b01870bf12288b4a9af46eea6d6740a, type: 2}
+  PrefabSuccess: {fileID: 1698831878116978, guid: ea79a0ae74d4c8c4f907b3d1a2ed7b1a,
+    type: 2}
+  PrefabFail: {fileID: 1220558534414064, guid: 45b59fae4751e9f4ea13617cc96a397c, type: 2}
   SelectedCommands: []
+  GoalRestroom: {fileID: 0}
 --- !u!114 &114913757012440852
 MonoBehaviour:
   m_ObjectHideFlags: 1
