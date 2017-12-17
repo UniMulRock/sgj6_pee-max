@@ -80,6 +80,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90ef0390dad384acd828322e11e5af92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PrefabEvent: {fileID: 1707198065004588, guid: b73bbee7536f37840b7dc13a18cf5f74,
+    type: 2}
   PrefabInput: {fileID: 1307781177960284, guid: 2d3b29133fd5541cba5ffab054e6a1b3,
     type: 2}
   SelectedCommands: []
