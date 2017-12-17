@@ -18,9 +18,9 @@ namespace PeeMax.Char
 
 		public abstract bool IsDone ();
 
-		public abstract void Init (MonoBehaviour parent);
+		public abstract void Init (GameObject parent);
 
-		public abstract void Do (MonoBehaviour parent);
+		public abstract void Do (GameObject parent);
         
     }
 }
