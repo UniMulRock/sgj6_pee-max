@@ -16,18 +16,15 @@ namespace PeeMax.System
 
 		public int IndexOfCurrentCommand;
 
-		public float startDelay = 2f;
-		public float endDelay = 2f;
-		private WaitForSeconds startWait;
-		private WaitForSeconds endWait;
+		public float delayTime = 2f;
+		private WaitForSeconds delayWait;
 
 
 		// Use this for initialization
 		void Start () {
 			IndexOfCurrentCommand = 0;
 
-			startWait = new WaitForSeconds(startDelay);
-			endWait = new WaitForSeconds(endDelay);
+			delayWait = new WaitForSeconds(delayTime);
 			StartCoroutine(MainLoop());
 		}
 
@@ -146,7 +143,7 @@ namespace PeeMax.System
 		{
 			while (true) {
 
-				yield return startWait;
+				yield return delayWait;
 
 				// 導入イベント
 				yield return StartCoroutine (PhaseEventCommand ());
@@ -154,7 +151,7 @@ namespace PeeMax.System
 				// コマンド入力
 				yield return StartCoroutine (PhaseInputCommand ());
 
-				yield return startWait;
+				yield return delayWait;
 
 				//ゲーム終了まで末
 				while (true) {
