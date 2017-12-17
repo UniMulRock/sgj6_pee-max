@@ -10,12 +10,16 @@ namespace PeeMax.Stage
 
 		public GameObject PrefabEvent;
 		public GameObject PrefabInput;
+		public GameObject PrefabAsk;
+
+		public GameObject PrefabSuccess;
+		public GameObject PrefabFail;
 
 		public List<GameObject> SelectedCommands = new List<GameObject>();
 
 		public GoalData GoalRestroom;
 
-		float delayTime = 2f;
+		float delayTime = 1f;
 		WaitForSeconds delayWait;
 		GameObject CharRoot;
 
@@ -166,6 +170,29 @@ namespace PeeMax.Stage
 			yield return null;
 		}
 
+
+		private IEnumerator PhaseASKCommand()
+		{
+			GameObject preObj = null;
+
+			//導入イベント画面
+			if (PrefabEvent != null) {
+				preObj = GameObject.Instantiate (PrefabAsk);
+			}
+
+			// 終わるまで待つ
+			while (preObj != null)
+			{
+				if (Input.anyKey) {
+					GameObject.Destroy (preObj);
+					break;
+				}
+				yield return null;
+			}
+			yield return null;
+		}
+
+
 		#endregion
 
 		/// <summary>
@@ -203,10 +230,14 @@ namespace PeeMax.Stage
 
 				// 導入イベント
 				yield return StartCoroutine (PhaseEventCommand ());
+				yield return delayWait;
+
+				// ASKイベント
+				yield return StartCoroutine (PhaseASKCommand ());
+				yield return delayWait;
 
 				// コマンド入力
 				yield return StartCoroutine (PhaseInputCommand ());
-
 				yield return delayWait;
 
 				isStartedGame = true;
