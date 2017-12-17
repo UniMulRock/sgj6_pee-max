@@ -34,6 +34,10 @@ namespace PeeMax.Char
 			}
 		}
 
+		public override string ToString(){
+			return "CharMoveCtrl" + MoveBlocks.ToString ();
+		}
+
 	}
 
 }

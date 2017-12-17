@@ -29,6 +29,10 @@ namespace PeeMax.Char
 				isend = true;
 			}
 		}
+
+		public override string ToString(){
+			return "CharTurnRightCtrl";
+		}
 	}
 
 }
