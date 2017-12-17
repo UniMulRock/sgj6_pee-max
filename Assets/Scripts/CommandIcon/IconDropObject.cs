@@ -14,7 +14,7 @@ public class IconDropObject : MonoBehaviour, IDropHandler, IPointerEnterHandler,
     {
         nowSprite = null;
 
-		var list = PeeMax.System.GameManager.Instance.SelectedCommands;
+		var list = PeeMax.Stage.GameManager.Instance.SelectedCommands;
 		var cmdObj = (list.Count > Index) ? list [Index] : null;
 		if (cmdObj != null) {
 			Image droppedImage = cmdObj.GetComponent<Image>();
@@ -50,6 +50,6 @@ public class IconDropObject : MonoBehaviour, IDropHandler, IPointerEnterHandler,
         nowSprite = droppedImage.sprite;
         iconImage.color = Vector4.one;
 
-		PeeMax.System.GameManager.Instance.InsertSelectedCommand (pointerEventData.pointerDrag, Index);
+		PeeMax.Stage.GameManager.Instance.InsertSelectedCommand (pointerEventData.pointerDrag, Index);
     }
 }

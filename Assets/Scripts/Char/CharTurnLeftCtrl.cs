@@ -30,5 +30,8 @@ namespace PeeMax.Char
 			}
 		}
 
+		public override string ToString(){
+			return "CharTurnLeftCtrl";
+		}
 	}
 }

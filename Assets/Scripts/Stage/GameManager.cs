@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace PeeMax.System
+namespace PeeMax.Stage
 {
-
 	public class GameManager : Utility.System.SingletonMonoBehaviour<GameManager> {
 
 		public GameObject PrefabEvent;
@@ -14,20 +13,39 @@ namespace PeeMax.System
 
 		public List<GameObject> SelectedCommands = new List<GameObject>();
 
+		public GoalData GoalRestroom;
+
 		float delayTime = 2f;
 		WaitForSeconds delayWait;
 		GameObject CharRoot;
 
 		bool isStartedGame = false;
+		bool isStartedCommand = false;
 
 		// Use this for initialization
 		void Start () {
 			isStartedGame = false;
+			isStartedCommand = false;
 
 			delayWait = new WaitForSeconds(delayTime);
 			StartCoroutine(MainLoop());
 
 			CharRoot = global::System.Scene.GameSceneSystem.Instance.CharRootObject;
+			if (CharRoot != null) {
+				var start = GameObject.FindWithTag ("Start");
+				if (start != null) {
+					CharRoot.transform.position = start.transform.position;
+					CharRoot.transform.rotation = start.transform.rotation;
+				}
+			}
+
+			// ゴールをランダムで決定
+			var list = GameObject.FindGameObjectsWithTag ("Goal");
+			if (list.Length == 0) {
+				Debug.LogError ("ERROR : GOALが設定されていません！！");
+			}
+			int index = (list.Length > 0) ? (int)Random.Range (0, list.Length-1) : 0;
+			GoalRestroom = list [index].GetComponent<GoalData> () as GoalData;
 		}
 
 		// Update is called once per frame
@@ -39,9 +57,24 @@ namespace PeeMax.System
 				int count = SelectedCommands.Count;
 				var controll = GetCurrentCharController();
 				if (count > 0 && controll != null) {
+					// コマンドの初期化
+					if (isStartedCommand == false) {
+						isStartedCommand = true;
+						controll.Init (CharRoot);
+					}
+
+					// コマンドの実行
 					controll.Do(CharRoot);
+
+					// コマンド終了？
 					if (controll.IsDone () == true) {
-						PeeMax.System.GameManager.Instance.NextCharController ();
+						// 次のコマンド
+						isStartedCommand = false;
+						PeeMax.Stage.GameManager.Instance.NextCharController ();
+						controll = GetCurrentCharController();
+						if (controll == null) {
+							// 全コマンド実行完了 -> トイレに到達
+						}
 					}
 				}
 			}
