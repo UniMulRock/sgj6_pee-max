@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 222531207098616314}
   - component: {fileID: 114919449939773520}
   - component: {fileID: 114997104593151140}
+  - component: {fileID: 114757759816132774}
   m_Layer: 5
   m_Name: CmdTurnLeft
   m_TagString: Untagged
@@ -29,6 +30,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114757759816132774
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1521102307817984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b741383c324fd4a7ab76c814a4ecd9cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114919449939773520
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -48,7 +60,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 49b611e658efbf443b686a4036f74fe3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1fb83c6c6a6104acba3347ca9023bdb7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
