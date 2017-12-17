@@ -33,6 +33,11 @@ namespace System.Scene
             set{ autoCam.SetTarget(value); }
         }
 
+		public GameObject CharRootObject
+		{
+			get { return charRoot; }
+		}
+
         protected override void Awake()
         {
             if (WindowManager.Validation())

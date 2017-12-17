@@ -16,13 +16,13 @@ namespace PeeMax.Char
 			return isend;
 		}
 
-		public override void Init (MonoBehaviour parent)
+		public override void Init (GameObject parent)
 		{
 			moveTime = 0.0f;
 			isend = false;
 		}
 
-		public override void Do (MonoBehaviour parent)
+		public override void Do (GameObject parent)
 		{
 			if (moveTime <= (float)MoveBlocks) {
 				moveTime += Time.deltaTime;

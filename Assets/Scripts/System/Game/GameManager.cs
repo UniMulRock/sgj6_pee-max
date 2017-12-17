@@ -14,25 +14,42 @@ namespace PeeMax.System
 
 		public List<GameObject> SelectedCommands = new List<GameObject>();
 
-		public int IndexOfCurrentCommand;
-
 		float delayTime = 2f;
 		WaitForSeconds delayWait;
+		GameObject CharRoot;
 
+		bool isStartedGame = false;
 
 		// Use this for initialization
 		void Start () {
-			IndexOfCurrentCommand = 0;
+			isStartedGame = false;
 
 			delayWait = new WaitForSeconds(delayTime);
 			StartCoroutine(MainLoop());
+
+			CharRoot = global::System.Scene.GameSceneSystem.Instance.CharRootObject;
 		}
 
 		// Update is called once per frame
 		void Update () {
 
+			if (isStartedGame && CharRoot != null) {
+
+				// キャラクターへコマンドを伝える
+				int count = SelectedCommands.Count;
+				var controll = GetCurrentCharController();
+				if (count > 0 && controll != null) {
+					controll.Do(CharRoot);
+					if (controll.IsDone () == true) {
+						PeeMax.System.GameManager.Instance.NextCharController ();
+					}
+				}
+			}
+
 		}
 			
+		#region API SelectedCommand
+
 		/// <summary>
 		/// Inserts the selected command.
 		/// </summary>
@@ -47,9 +64,10 @@ namespace PeeMax.System
 			}
 
 			if (index < 0 || this.SelectedCommands.Count <= index) {
-				this.SelectedCommands.Add (cmdObject);
+				this.SelectedCommands.Add (GameObject.Instantiate(cmdObject));
 			} else {
-				this.SelectedCommands [index] = cmdObject;
+				GameObject.Destroy (this.SelectedCommands [index]);
+				this.SelectedCommands [index] = GameObject.Instantiate(cmdObject);
 			}
 		}
 
@@ -59,7 +77,6 @@ namespace PeeMax.System
 		public void ClearSelecedCommand()
 		{
 			SelectedCommands.Clear ();
-			IndexOfCurrentCommand = 0;
 		}
 
 		/// <summary>
@@ -69,11 +86,11 @@ namespace PeeMax.System
 		/// <returns>=null..コマンド終了</returns>
 		public PeeMax.Char.CharController GetCurrentCharController()
 		{
-			if (this.SelectedCommands.Count <= IndexOfCurrentCommand) {
+			if (this.SelectedCommands.Count <= 0) {
 				// コマンド終了
 				return null;
 			}
-			return SelectedCommands[IndexOfCurrentCommand].GetComponent<PeeMax.Char.CharController> () as PeeMax.Char.CharController;
+			return SelectedCommands[0].GetComponent<PeeMax.Char.CharController> () as PeeMax.Char.CharController;
 		}
 
 		/// <summary>
@@ -82,10 +99,14 @@ namespace PeeMax.System
 		/// </summary>
 		public void NextCharController()
 		{
-			if (this.SelectedCommands.Count > IndexOfCurrentCommand) {
-				IndexOfCurrentCommand++;
+			if (this.SelectedCommands.Count > 0) {
+				SelectedCommands.RemoveAt (0);
 			}
 		}
+
+		#endregion
+
+		#region Coroutine
 
 		/// <summary>
 		/// 導入イベント
@@ -111,6 +132,8 @@ namespace PeeMax.System
 			}
 			yield return null;
 		}
+
+		#endregion
 
 		/// <summary>
 		/// コマンド入力
@@ -152,6 +175,8 @@ namespace PeeMax.System
 				yield return StartCoroutine (PhaseInputCommand ());
 
 				yield return delayWait;
+
+				isStartedGame = true;
 
 				//ゲーム終了まで末
 				while (true) {
