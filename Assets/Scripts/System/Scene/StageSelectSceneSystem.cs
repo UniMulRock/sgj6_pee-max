@@ -7,7 +7,7 @@ using PeeMax.Icon;
 
 namespace System.Scene
 {
-    public class StageSelectSceneSystem : SingletonMonoBehaviour<StageSelectSceneSystem>
+	public class StageSelectSceneSystem : SingletonMonoBehaviour<StageSelectSceneSystem>
     {
         /// <summary>
         /// WindowRoot
@@ -40,6 +40,9 @@ namespace System.Scene
 
         protected override void Awake()
         {
+			base.Awake ();
+			GameObject.DontDestroyOnLoad(this.gameObject);
+
             if (WindowManager.Validation())
             {
                 WindowManager.Instance.WindowRoot = windowRoot;

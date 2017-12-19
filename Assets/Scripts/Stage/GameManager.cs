@@ -11,6 +11,7 @@ namespace PeeMax.Stage
 		public GameObject PrefabEvent;
 		public GameObject PrefabInput;
 		public GameObject PrefabAsk;
+		public GameObject PrefabDescrib;
 
 		public GameObject PrefabSuccess;
 		public GameObject PrefabFail;
@@ -173,6 +174,26 @@ namespace PeeMax.Stage
 		}
 
 
+		GameObject preObjDescrib = null;
+		private IEnumerator PhaseDescribCommand()
+		{
+
+			//導入イベント画面
+			if (PrefabEvent != null) {
+				preObjDescrib = GameObject.Instantiate (PrefabDescrib);
+			}
+
+			// 終わるまで待つ
+			while (preObjDescrib != null)
+			{
+				if (Input.anyKey) {
+					break;
+				}
+				yield return null;
+			}
+			yield return null;
+		}
+
 		private IEnumerator PhaseASKCommand()
 		{
 			GameObject preObj = null;
@@ -218,8 +239,6 @@ namespace PeeMax.Stage
 			yield return null;
 		}
 
-		#endregion
-
 		/// <summary>
 		/// コマンド入力
 		/// </summary>
@@ -239,6 +258,9 @@ namespace PeeMax.Stage
 			while (preObj != null)
 			{
 				if (inpObj.IsEndOfInputCommand) {
+					if (preObjDescrib != null) {
+						GameObject.Destroy (preObjDescrib);
+					}
 					GameObject.Destroy (preObj);
 					break;
 				}
@@ -246,6 +268,8 @@ namespace PeeMax.Stage
 			}
 			yield return null;
 		}
+
+		#endregion
 
 		private IEnumerator MainLoop()
 		{
@@ -255,6 +279,10 @@ namespace PeeMax.Stage
 
 				// 導入イベント
 				yield return StartCoroutine (PhaseEventCommand ());
+				yield return delayWait;
+
+				// 案内イベント
+				yield return StartCoroutine (PhaseDescribCommand ());
 				yield return delayWait;
 
 				// ASKイベント

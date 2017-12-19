@@ -27,6 +27,8 @@ namespace System.Scene
         [SerializeField]
         private string bgmName;
 
+		public string DebugStageName = "stage1";
+
         public Transform CamTarget
         {
             get{ return autoCam.Target; }
@@ -47,13 +49,19 @@ namespace System.Scene
 
             if (CharGenerater.Validation())
             {
-                var character = CharGenerater.Instance.CreateChar(charRoot.transform);
-				CamTarget = charRoot.transform;//character.transform;
+                CharGenerater.Instance.CreateChar(charRoot.transform);
+				CamTarget = charRoot.transform;
             }
 
-            if (StageGenerater.Validation())
+			if (StageGenerater.Validation())
             {
-                StageGenerater.Instance.CreateStage(stageRoot.transform,"test1");
+				string stageDataName = DebugStageName;
+				if (StageSelectSceneSystem.Validation ()) {
+					stageDataName = StageSelectSceneSystem.Instance.CurrentStageData.StageDataName;
+				} else {
+					
+				}
+				StageGenerater.Instance.CreateStage(stageRoot.transform, stageDataName );
             }
         }
 
