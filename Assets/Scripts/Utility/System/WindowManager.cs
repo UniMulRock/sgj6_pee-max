@@ -51,8 +51,14 @@ namespace Utility.System
         new void Awake()
         {
             base.Awake();
+			InitScene ();
             DontDestroyOnLoad(gameObject);
         }
+
+		public void InitScene()
+		{
+			CurrentWindowType = WINDOW_TYPE.NONE;
+		}
 
         public Transform CreateWindow(WINDOW_TYPE type)
         {

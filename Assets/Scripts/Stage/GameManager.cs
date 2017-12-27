@@ -11,7 +11,6 @@ namespace PeeMax.Stage
 		public GameObject PrefabEvent;
 		public GameObject PrefabInput;
 		public GameObject PrefabAsk;
-		public GameObject PrefabDescrib;
 
 		public GameObject PrefabSuccess;
 		public GameObject PrefabFail;
@@ -26,17 +25,20 @@ namespace PeeMax.Stage
 
 		bool isStartedGame = false;
 		bool isStartedCommand = false;
+		int indexOfCommand = 0;
 
 		// Use this for initialization
 		void Start () {
 			isStartedGame = false;
 			isStartedCommand = false;
+			indexOfCommand = 0;
 
 			delayWait = new WaitForSeconds(delayTime);
 			StartCoroutine(MainLoop());
 
 			CharRoot = global::System.Scene.GameSceneSystem.Instance.CharRootObject;
 			if (CharRoot != null) {
+				// キャラクターの開始位置を設定
 				var start = GameObject.FindWithTag ("Start");
 				if (start != null) {
 					CharRoot.transform.position = start.transform.position;
@@ -51,6 +53,16 @@ namespace PeeMax.Stage
 			}
 			int index = (list.Length > 0) ? (int)Random.Range (0, list.Length-1) : 0;
 			GoalRestroom = list [index].GetComponent<GoalData> () as GoalData;
+		}
+
+		void InitScene()
+		{
+			indexOfCommand = 0;
+			isStartedGame = false;
+			isStartedCommand = false;
+			if (Utility.System.WindowManager.Instance != null) {
+				Utility.System.WindowManager.Instance.InitScene ();
+			}
 		}
 
 		// Update is called once per frame
@@ -73,13 +85,32 @@ namespace PeeMax.Stage
 
 					// コマンド終了？
 					if (controll.IsDone () == true) {
+						// コマンド判定（正解とあっている？ー＞合っていないときは終了）
+						if (GoalRestroom.CorrectCommands.Length <= indexOfCommand) {
+							// 失敗：コマンドの数が合わない
+							InitScene();
+							StartCoroutine (PhaseFailCommand ());
+							return;
+						}
+						var cmdCorrect = GoalRestroom.CorrectCommands[indexOfCommand].GetComponent<PeeMax.Char.CharController> () as PeeMax.Char.CharController;
+						if (GoalRestroom != null && GoalRestroom.CorrectCommands.Length > 0) {
+							if (indexOfCommand >= GoalRestroom.CorrectCommands.Length
+								|| controll.ToString() != cmdCorrect.ToString()){
+								// 失敗：コマンドが違う
+								InitScene();
+								StartCoroutine (PhaseFailCommand ());
+								return;
+							}
+						}
+
 						// 次のコマンド
 						isStartedCommand = false;
+						indexOfCommand ++;
 						PeeMax.Stage.GameManager.Instance.NextCharController ();
 						controll = GetCurrentCharController();
 						if (controll == null) {
 							// 全コマンド実行完了 -> トイレに到達
-
+							InitScene();
 							StartCoroutine (PhaseSuccessCommand ());
 						}
 					}
@@ -177,10 +208,11 @@ namespace PeeMax.Stage
 		GameObject preObjDescrib = null;
 		private IEnumerator PhaseDescribCommand()
 		{
-
 			//導入イベント画面
-			if (PrefabEvent != null) {
-				preObjDescrib = GameObject.Instantiate (PrefabDescrib);
+			if (GoalRestroom != null && GoalRestroom.EnglishMessage != null) {
+				preObjDescrib = GameObject.Instantiate (GoalRestroom.EnglishMessage);
+			} else {
+				preObjDescrib = null;
 			}
 
 			// 終わるまで待つ
@@ -193,13 +225,13 @@ namespace PeeMax.Stage
 			}
 			yield return null;
 		}
-
+			
 		private IEnumerator PhaseASKCommand()
 		{
 			GameObject preObj = null;
 
 			//導入イベント画面
-			if (PrefabEvent != null) {
+			if (PrefabAsk != null) {
 				preObj = GameObject.Instantiate (PrefabAsk);
 			}
 
@@ -220,8 +252,32 @@ namespace PeeMax.Stage
 			GameObject preObj = null;
 
 			//導入イベント画面
-			if (PrefabEvent != null) {
+			if (PrefabSuccess != null) {
 				preObj = GameObject.Instantiate (PrefabSuccess);
+			}
+
+			// 終わるまで待つ
+			while (preObj != null)
+			{
+				if (Input.anyKey) {
+					GameObject.Destroy (preObj);
+
+					Utility.System.Sound.StopBgm ();
+					Utility.System.SceneManager.Instance.ChangeState(Utility.System.SceneManager.STATE.STAGE_SELECT);
+					break;
+				}
+				yield return null;
+			}
+			yield return null;
+		}
+
+		private IEnumerator PhaseFailCommand()
+		{
+			GameObject preObj = null;
+
+			//導入イベント画面
+			if (PrefabFail != null) {
+				preObj = GameObject.Instantiate (PrefabFail);
 			}
 
 			// 終わるまで待つ
@@ -284,6 +340,11 @@ namespace PeeMax.Stage
 				// 案内イベント
 				yield return StartCoroutine (PhaseDescribCommand ());
 				yield return delayWait;
+
+				// ボイス
+				if (GoalRestroom != null && GoalRestroom.Voice != null) {
+					Utility.System.Sound.PlayVoice(GoalRestroom.Voice.ToString());
+				}
 
 				// ASKイベント
 				yield return StartCoroutine (PhaseASKCommand ());

@@ -7,7 +7,7 @@ namespace PeeMax.Stage
 	{
 		public GameObject EnglishMessage;
 
-		public AudioSource Voice;
+		public AudioClip Voice;
 
 		public GameObject[] CorrectCommands;
 

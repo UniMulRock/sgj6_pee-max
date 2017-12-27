@@ -58,8 +58,6 @@ namespace System.Scene
 				string stageDataName = DebugStageName;
 				if (StageSelectSceneSystem.Validation ()) {
 					stageDataName = StageSelectSceneSystem.Instance.CurrentStageData.StageDataName;
-				} else {
-					
 				}
 				StageGenerater.Instance.CreateStage(stageRoot.transform, stageDataName );
             }
