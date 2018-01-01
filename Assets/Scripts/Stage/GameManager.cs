@@ -8,6 +8,11 @@ namespace PeeMax.Stage
 {
 	public class GameManager : Utility.System.SingletonMonoBehaviour<GameManager> {
 
+		public AudioSource MasterAudioSource;
+		public AudioClip seStartMission;
+		public AudioClip seSuccess;
+		public AudioClip seFail;
+
 		public GameObject PrefabEvent;
 		public GameObject PrefabInput;
 		public GameObject PrefabAsk;
@@ -32,6 +37,7 @@ namespace PeeMax.Stage
 			isStartedGame = false;
 			isStartedCommand = false;
 			indexOfCommand = 0;
+
 
 			delayWait = new WaitForSeconds(delayTime);
 			StartCoroutine(MainLoop());
@@ -89,6 +95,11 @@ namespace PeeMax.Stage
 						if (GoalRestroom.CorrectCommands.Length <= indexOfCommand) {
 							// 失敗：コマンドの数が合わない
 							InitScene();
+							// Fail
+							if (seFail != null && MasterAudioSource != null) {
+								MasterAudioSource.clip = seFail;
+								MasterAudioSource.Play ();
+							}
 							StartCoroutine (PhaseFailCommand ());
 							return;
 						}
@@ -98,6 +109,11 @@ namespace PeeMax.Stage
 								|| controll.ToString() != cmdCorrect.ToString()){
 								// 失敗：コマンドが違う
 								InitScene();
+								// Fail
+								if (seFail != null && MasterAudioSource != null) {
+									MasterAudioSource.clip = seFail;
+									MasterAudioSource.Play ();
+								}
 								StartCoroutine (PhaseFailCommand ());
 								return;
 							}
@@ -111,6 +127,11 @@ namespace PeeMax.Stage
 						if (controll == null) {
 							// 全コマンド実行完了 -> トイレに到達
 							InitScene();
+							// Success
+							if (seSuccess != null && MasterAudioSource != null) {
+								MasterAudioSource.clip = seSuccess;
+								MasterAudioSource.Play ();
+							}
 							StartCoroutine (PhaseSuccessCommand ());
 						}
 					}
@@ -342,8 +363,10 @@ namespace PeeMax.Stage
 				yield return delayWait;
 
 				// ボイス
-				if (GoalRestroom != null && GoalRestroom.Voice != null) {
-					Utility.System.Sound.PlayVoice(GoalRestroom.Voice.ToString());
+				if (GoalRestroom != null && GoalRestroom.Voice != null && MasterAudioSource != null) {
+//					Utility.System.Sound.PlayVoice(GoalRestroom.Voice.ToString());
+					MasterAudioSource.clip = GoalRestroom.Voice;
+					MasterAudioSource.Play ();
 				}
 
 				// ASKイベント
@@ -353,6 +376,13 @@ namespace PeeMax.Stage
 				// コマンド入力
 				yield return StartCoroutine (PhaseInputCommand ());
 				yield return delayWait;
+
+				// Start
+				if (seStartMission != null && MasterAudioSource != null) {
+					MasterAudioSource.clip = seStartMission;
+					MasterAudioSource.Play ();
+				}
+
 
 				isStartedGame = true;
 

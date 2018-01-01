@@ -287,11 +287,12 @@ namespace Utility.System
         /// ※事前にLoadVoiceでロードしておくこと
         public static void PlayVoice(string key = "Enter")
         {
-            Instance._PlayVoice("Se/" + key);
+			Instance._PlayVoice("Voice/" + key);
         }
 
         void _PlayVoice(string key)
         {
+			Debug.Log (key);
             _LoadVoice(key);
 
             // リソースの取得

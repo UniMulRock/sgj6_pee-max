@@ -100,6 +100,8 @@ namespace System.Scene
                 stageButtonList[stageButtonList.Keys.Count - 1].Count,
                 data
             );
+
+			Sound.PlayBgm(bgmName);
         }
 
         private void CreateStagePage(int pageValue)
